@@ -6,11 +6,12 @@ module.exports = {
     require("postcss-import")(),
     require("tailwindcss"),
     require("autoprefixer"),
+    // @TODO: fix purgecss for dynamic classes
     // Only purge css on production
-    production &&
-      purgecss({
-        content: ["./**/*.html", "./**/*.svelte"],
-        defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
-      })
+    // production &&
+    //   purgecss({
+    //     content: ["./**/*.html", "./**/*.svelte"],
+    //     defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
+    //   })
   ]
 };
