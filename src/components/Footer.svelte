@@ -2,7 +2,7 @@
   export let dark = false;
 </script>
 
-<footer class="text-sm w-full text-center mt-5 text-gray-600">
+<footer class="text-sm w-full text-center mt-5 text-gray-600 mb-5">
   &copy; 2019 -
   <a class="text-blue-600 font-semibold" href="https://www.linkedin.com/in/emsifa" target="_blank">Muhammad Syifa</a>
   <a href="https://www.github.com/emsifa/cronmu" target="_blank" class="text-blue-300 font-semibold"><small>(github)</small></a>,
