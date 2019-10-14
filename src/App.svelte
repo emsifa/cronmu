@@ -60,8 +60,8 @@
   }
 </script>
 
-<main class="w-full h-screen" class:bg-gray-200={!dark} class:bg-gray-900={dark}>
-  <div class="flex h-screen flex-wrap content-center justify-center">
+<main class="w-full h-screen overflow-auto" class:bg-gray-200={!dark} class:bg-gray-900={dark}>
+  <div class="flex h-screen flex-wrap mt-8 md:mt-0 md:content-center justify-center">
     <div class="w-5/6 md:w-2/6">
       <Header dark/>
       <div class="mb-3">
