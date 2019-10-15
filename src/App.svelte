@@ -1,14 +1,17 @@
 <script>
+  import { onMount } from 'svelte';
+  import { addMinutes } from 'date-fns';
 	import { fade } from 'svelte/transition';
-  import capitalize from 'lodash/capitalize';
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
   import Error from './components/Error.svelte';
   import InputCron from './components/InputCron.svelte';
   import Explanation from './components/Explanation.svelte';
   import Documentation from './components/Documentation.svelte';
+  import NextTrigger from './components/NextTrigger.svelte';
 
   import Parser from './libs/parser';
+  import { findNext } from './libs/find-next';
   import { explainArray } from './libs/explainer';
   import { validate } from './libs/validator';
   import examples from './data/examples';
@@ -20,6 +23,20 @@
   let error = "";
   let cursor = "";
   let explanations = [];
+  let nextTriggers = [];
+  let time = addMinutes(new Date(), 1);
+
+  onMount(() => {
+    const interval = setInterval(() => {
+      if (new Date().getSeconds() === 1) {
+        time = addMinutes(new Date(), 1);
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  });
 
   function updateCursor(evt) {
     cursor = "";
@@ -44,6 +61,7 @@
     error = "";
     parsed = null;
     explanations = [];
+    nextTriggers = [];
 
     try {
       parsed = Parser.parse(query);
@@ -51,7 +69,9 @@
       if (invalid) {
         throw { message: invalid };
       }
+
       explanations = explainArray(parsed);
+      nextTriggers = findNext(parsed, time);
       window.history.replaceState({query: query}, query, `?query=${query.replace(/ /g, '_')}`);
     } catch (e) {
       error = e.message;
@@ -62,8 +82,8 @@
 <main class="w-full h-screen overflow-auto"
   class:bg-gray-200={!dark}
   class:bg-gray-900={dark}>
-  <div class="flex h-screen flex-wrap mt-8 md:mt-0 md:content-center justify-center">
-    <div class="w-5/6 md:w-2/6">
+  <div class="flex h-screen flex-wrap mt-8">
+    <div class="w-5/6 md:w-2/6 m-auto">
       <Header dark/>
       <div class="mb-3">
         <InputCron {dark} bind:query={query} error={error} on:cursor={updateCursor}/>
@@ -78,7 +98,13 @@
 
       {#if cursor}
         <div transition:fade={{duration: 200}}>
-          <Documentation title={capitalize(trans[cursor])} examples={examples[cursor]} {dark}/>
+          <Documentation title={trans[cursor].toUpperCase()} examples={examples[cursor]} {dark}/>
+        </div>
+      {/if}
+
+      {#if nextTriggers.length}
+        <div transition:fade={{duration: 200}}>
+          <NextTrigger times={nextTriggers} {dark}/>
         </div>
       {/if}
 

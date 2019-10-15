@@ -34,7 +34,7 @@
       {#each examples as example}
       <tr>
         <td
-          class="sign border px-3 py-2 text-right text-blue-500 text-bold text-lg"
+          class="sign text-right text-blue-500 text-bold text-lg border px-3 py-2"
           class:border-gray-900={dark}
           class:border-gray-300={!dark}>
           {example.example}

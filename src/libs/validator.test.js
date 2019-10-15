@@ -1,27 +1,9 @@
 import { validate } from './validator';
-
-const mockType = (type, value, text) => ({type, value, text});
-const mockWhitespace = (ws = " ") => mockType("ws", ws, ws);
-const mockNumber = (number, step = null) => mockType("number", { number, step }, `${number}${step? '/' + step : ''}`);
-const mockRange = (from, to, step = null) => mockType("range", { from, to, step }, `${from}-${to}${step? '/' + step : ''}`);
-const makeText = (data) => Array.isArray(data) ? data.map(d => d.text).join(',') : (data ? data.text : "");
-const mockGroup = (data) => {
-  return mockType("group", !data ? [mockNumber(3)] : Array.isArray(data) ? data : [data], makeText(data))
-};
-
-const mockSchema = ({minute = null, hour = null, date = null, month = null, day = null}) => {
-  return [
-    mockGroup(minute),
-    mockWhitespace(),
-    mockGroup(hour),
-    mockWhitespace(),
-    mockGroup(date),
-    mockWhitespace(),
-    mockGroup(month),
-    mockWhitespace(),
-    mockGroup(day),
-  ];
-};
+import {
+  mockNumber,
+  mockRange,
+  mockSchema,
+} from './mocker';
 
 test('minute must be between 0-59', () => {
   expect(validate(mockSchema({ minute: mockNumber(0) }))).toBe(null);

@@ -1,28 +1,11 @@
 import { explain } from './explainer';
-
-const mockType = (type, value, text) => ({type, value, text});
-const mockAny = () => mockType('any', true, '*');
-const mockWhitespace = (ws = " ") => mockType("ws", ws, ws);
-const mockNumber = (number, step = null) => mockType("number", { number, step }, `${number}${step? '/' + step : ''}`);
-const mockRange = (from, to, step = null) => mockType("range", { from, to, step }, `${from}-${to}${step? '/' + step : ''}`);
-const makeText = (data) => Array.isArray(data) ? data.map(d => d.text).join(',') : (data ? data.text : "");
-const mockGroup = (data) => {
-  return mockType("group", !data ? [mockAny()] : Array.isArray(data) ? data : [data], makeText(data))
-};
-
-const mockSchema = ({minute = null, hour = null, date = null, month = null, day = null} = {}) => {
-  return [
-    mockGroup(minute),
-    mockWhitespace(),
-    mockGroup(hour),
-    mockWhitespace(),
-    mockGroup(date),
-    mockWhitespace(),
-    mockGroup(month),
-    mockWhitespace(),
-    mockGroup(day),
-  ];
-};
+import {
+  mockType,
+  mockAny,
+  mockNumber,
+  mockRange,
+  mockSchema,
+} from './mocker';
 
 test('* * * * * = "Setiap menit."', () => {
   expect(explain(mockSchema())).toBe("Setiap menit.");

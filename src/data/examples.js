@@ -14,7 +14,7 @@ export default {
     { example: "5-10/2", desc: "Kelipatan 2 antara jam 5 sampai 10." },
   ],
   "date": [
-    { example: "*", desc: "Setiap tanggal." },
+    { example: "*", desc: "Tanggal berapapun." },
     { example: "1,15,30", desc: "Tanggal 1, 15, dan 30." },
     { example: "1-10", desc: "Dari tanggal 1 sampai 10." },
     { example: "5/2", desc: "Kelipatan 2 antara tanggal 5 sampai 31." },

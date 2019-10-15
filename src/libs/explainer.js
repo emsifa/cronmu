@@ -1,3 +1,5 @@
+import { isAny } from './utils';
+
 const months = {
   "JAN": "Januari",
   "FEB": "Februari",
@@ -41,14 +43,6 @@ const combine = (array) => {
 
   const last = array.pop();
   return `${array.join(', ')}, dan ${last}`;
-};
-
-const isAny = (data) => {
-  switch (data.type) {
-    case 'group': return data.value.find(d => d.type == 'any') ? true : false;
-    case 'any': return true;
-    default: return false;
-  }
 };
 
 const alias = (n, aliases = []) => aliases[n] || n;
@@ -119,7 +113,7 @@ export const explainArray = (schema) => {
     { isAny: isAnyMinute, explain: explainMinute(minute), prefix: 'Setiap menit', type: 'minute' },
     { isAny: isAnyHour, explain: explainHour(hour), prefix: 'Pada jam', type: 'hour' },
     { isAny: isAnyDate, explain: explainDate(date), prefix: 'Di tanggal', type: 'date' },
-    { isAny: isAnyDay, explain: explainDay(day), prefix: !isAnyDate ? 'Juga di hari' : 'Di hari', type: 'day' },
+    { isAny: isAnyDay, explain: explainDay(day), prefix: !isAnyDate ? 'Atau di hari' : 'Di hari', type: 'day' },
     { isAny: isAnyMonth, explain: explainMonth(month), prefix: 'Pada bulan', type: 'month' },
   ];
 

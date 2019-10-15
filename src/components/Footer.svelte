@@ -5,7 +5,13 @@
 <footer class="text-sm w-full text-center mt-5 text-gray-600 mb-5">
   &copy; 2019 -
   <a class="text-blue-600 font-semibold" href="https://www.linkedin.com/in/emsifa" target="_blank">Muhammad Syifa</a>
-  <a href="https://www.github.com/emsifa/cronmu" target="_blank" class="text-blue-300 font-semibold"><small>(github)</small></a>,
+  <a href="https://www.github.com/emsifa/cronmu"
+    target="_blank"
+    class="font-semibold"
+    class:text-blue-300={dark}
+    class:text-gray-700={!dark}>
+    <small>(github)</small>
+  </a>,
   menggunakan
   <a class="text-red-600 font-semibold" href="https://svelte.dev/" target="_blank">Svelte</a>,
   <a class="text-blue-700 font-semibold" href="https://pegjs.org/" target="_blank">PEG.js</a>

@@ -6,7 +6,6 @@ module.exports = {
     require("postcss-import")(),
     require("tailwindcss"),
     require("autoprefixer"),
-    // @TODO: fix purgecss for dynamic classes
     // Only purge css on production
     production &&
       purgecss({
