@@ -1,19 +1,18 @@
 <script>
 	import { fade } from 'svelte/transition';
+  import capitalize from 'lodash/capitalize';
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
   import Error from './components/Error.svelte';
   import InputCron from './components/InputCron.svelte';
   import Explanation from './components/Explanation.svelte';
-  import MinuteDoc from './components/MinuteDoc.svelte';
-  import HourDoc from './components/HourDoc.svelte';
-  import DateDoc from './components/DateDoc.svelte';
-  import MonthDoc from './components/MonthDoc.svelte';
-  import DayDoc from './components/DayDoc.svelte';
+  import Documentation from './components/Documentation.svelte';
 
   import Parser from './libs/parser';
   import { explainArray } from './libs/explainer';
   import { validate } from './libs/validator';
+  import examples from './data/examples';
+  import trans from './data/translations';
 
   export let query;
   export let dark;
@@ -60,7 +59,9 @@
   }
 </script>
 
-<main class="w-full h-screen overflow-auto" class:bg-gray-200={!dark} class:bg-gray-900={dark}>
+<main class="w-full h-screen overflow-auto"
+  class:bg-gray-200={!dark}
+  class:bg-gray-900={dark}>
   <div class="flex h-screen flex-wrap mt-8 md:mt-0 md:content-center justify-center">
     <div class="w-5/6 md:w-2/6">
       <Header dark/>
@@ -77,17 +78,7 @@
 
       {#if cursor}
         <div transition:fade={{duration: 200}}>
-          {#if cursor == 'minute'}
-            <MinuteDoc {dark}/>
-          {:else if cursor == 'hour'}
-            <HourDoc {dark}/>
-          {:else if cursor == 'date'}
-            <DateDoc {dark}/>
-          {:else if cursor == 'month'}
-            <MonthDoc {dark}/>
-          {:else if cursor == 'day'}
-            <DayDoc {dark}/>
-          {/if}
+          <Documentation title={capitalize(trans[cursor])} examples={examples[cursor]} {dark}/>
         </div>
       {/if}
 

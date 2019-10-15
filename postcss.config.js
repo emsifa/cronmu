@@ -8,10 +8,11 @@ module.exports = {
     require("autoprefixer"),
     // @TODO: fix purgecss for dynamic classes
     // Only purge css on production
-    // production &&
-    //   purgecss({
-    //     content: ["./**/*.html", "./**/*.svelte"],
-    //     defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
-    //   })
+    production &&
+      purgecss({
+        content: ["./**/*.html", "./**/*.svelte"],
+        defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [],
+        whitelistPatterns: [/bg-gray-/, /text-gray-/, /bg-blue-/, /text-blue-/]
+      })
   ]
 };

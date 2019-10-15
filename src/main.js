@@ -3,11 +3,12 @@ import App from './App.svelte';
 import './tailwind.css';
 
 const queries = queryString.parse(location.search);
+const hour = new Date().getHours();
 
 const app = new App({
   target: document.body,
   props: {
-    dark: new Date().getHours() >= 18,
+    dark: queries.dark == 1 ? true : hour >= 18 || hour <= 6,
     query: queries.query ? queries.query.replace(/_/g, ' ') : "* * * * *"
   }
 });
