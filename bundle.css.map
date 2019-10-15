@@ -1,8 +1,12 @@
 {
   "version": 3,
   "file": "bundle.css",
-  "sources": [],
-  "sourcesContent": [],
+  "sources": [
+    "..\\src\\components\\NextTrigger.svelte"
+  ],
+  "sourcesContent": [
+    "<script>\n  import { format } from 'date-fns';\n  import { id } from 'date-fns/locale';\n\n  export let dark;\n  export let times;\n\n  const fmt = (time, fmtString) => format(time, fmtString, {locale: id});\n</script>\n\n<style>\n  tbody tr:hover td {\n    background-color: rgba(0,0,0,.10);\n  }\n</style>\n\n<div\n  class=\"doc p-0 bg-white rounded mt-4 overflow-hidden shadow\"\n  class:bg-white={!dark}\n  class:text-gray-600={!dark}\n  class:bg-gray-800={dark}\n  class:text-white={dark}\n  >\n  <table class=\"w-full\">\n    <thead class=\"font-semibold\">\n      <tr>\n        <td colspan=\"3\" class=\"text-center py-2\">TRIGGER SELANJUTNYA</td>\n      </tr>\n      <tr>\n        <td\n          class=\"text-right text-bold text-lg border px-3 py-2 select-none\"\n          class:border-gray-900={dark}\n          class:border-gray-300={!dark}>\n          Hari\n        </td>\n        <td\n          class=\"text-center text-bold text-lg border px-3 py-2 select-none\"\n          class:border-gray-900={dark}\n          class:border-gray-300={!dark}>\n          Tanggal\n        </td>\n        <td\n          class=\"text-left text-bold text-lg border px-3 py-2 select-none\"\n          class:border-gray-900={dark}\n          class:border-gray-300={!dark}>\n          Jam\n        </td>\n      </tr>\n    </thead>\n    <tbody>\n      {#each times as time}\n      <tr>\n        <td\n          width=\"30\"\n          class=\"text-right text-bold text-sm border px-3 py-2 select-none text-blue-500\"\n          class:border-gray-900={dark}\n          class:border-gray-300={!dark}>\n          {fmt(time, 'EEEE')}\n        </td>\n        <td\n          width=\"40\"\n          class=\"text-center text-bold text-sm border px-3 py-2 select-none\"\n          class:border-gray-900={dark}\n          class:border-gray-300={!dark}>\n          {fmt(time, 'dd MMMM yyyy')}\n        </td>\n        <td\n          width=\"30\"\n          class=\"text-left text-bold text-sm border px-3 py-2 select-none text-blue-500\"\n          class:border-gray-900={dark}\n          class:border-gray-300={!dark}>\n          {fmt(time, 'HH:mm')}\n        </td>\n      </tr>\n      {/each}\n    </tbody>\n  </table>\n</div>\n"
+  ],
   "names": [],
-  "mappings": ""
+  "mappings": "AAWE,oBAAK,CAAC,EAAE,MAAM,CAAC,EAAE,eAAC,CAAC,AACjB,gBAAgB,CAAE,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,AACnC,CAAC"
 }
