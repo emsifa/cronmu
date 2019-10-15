@@ -2,7 +2,7 @@ Cronmu
 ======
 
 Cronmu adalah aplikasi hasil latihan Svelte saya
-yang berisi sebuah form yang dapat memahami isi cron kamu.
+yang berisi sebuah form yang dapat memahami isi [cron](http://man7.org/linux/man-pages/man5/crontab.5.html) kamu.
 
 Demo: [https://emsifa.github.io/cronmu/](https://emsifa.github.io/cronmu/)
 
