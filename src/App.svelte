@@ -7,15 +7,12 @@
   import Error from './components/Error.svelte';
   import InputCron from './components/InputCron.svelte';
   import Explanation from './components/Explanation.svelte';
-  import Documentation from './components/Documentation.svelte';
   import NextTrigger from './components/NextTrigger.svelte';
 
   import Parser from './libs/parser';
   import { findNext } from './libs/find-next';
   import { explainArray } from './libs/explainer';
   import { validate } from './libs/validator';
-  import examples from './data/examples';
-  import trans from './data/translations';
 
   export let query;
   export let dark;
@@ -85,22 +82,17 @@
   <div class="flex h-screen flex-wrap mt-8">
     <div class="w-5/6 md:w-2/6 m-auto">
       <Header dark/>
-      <div class="mb-3">
-        <InputCron {dark} bind:query={query} error={error} on:cursor={updateCursor}/>
-        {#if error}
-          <Error message={error} {dark}/>
-        {/if}
-      </div>
 
       {#if explanations.length}
         <Explanation {dark} {explanations} {cursor}/>
       {/if}
 
-      {#if cursor}
-        <div transition:fade={{duration: 200}}>
-          <Documentation title={trans[cursor].toUpperCase()} examples={examples[cursor]} {dark}/>
-        </div>
-      {/if}
+      <div class="my-3">
+        <InputCron {dark} bind:query={query} {cursor} {parsed} {error} on:cursor={updateCursor}/>
+        {#if error}
+          <Error message={error} {dark}/>
+        {/if}
+      </div>
 
       {#if nextTriggers.length}
         <div transition:fade={{duration: 200}}>

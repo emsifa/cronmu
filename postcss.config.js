@@ -11,7 +11,14 @@ module.exports = {
       purgecss({
         content: ["./**/*.html", "./**/*.svelte"],
         defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [],
-        whitelistPatterns: [/bg-gray-/, /text-gray-/, /bg-blue-/, /text-blue-/]
+        whitelistPatterns: [
+          /bg-gray-/,
+          /bg-blue-/,
+          /text-gray-/,
+          /text-blue-/,
+          /border-gray/,
+          /border-blue/,
+        ]
       })
   ]
 };

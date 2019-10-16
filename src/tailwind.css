@@ -1,5 +1,7 @@
 @import "tailwindcss/base";
-
 @import "tailwindcss/components";
-
 @import "tailwindcss/utilities";
+
+::selection {
+  @apply bg-teal-500 text-white;
+}

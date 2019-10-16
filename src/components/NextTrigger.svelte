@@ -9,20 +9,25 @@
 </script>
 
 <style>
-  tbody tr:hover td {
+  .dark tbody tr:hover td {
     background-color: rgba(0,0,0,.10);
+  }
+  .light tbody tr:hover td {
+    background-color: rgba(0,20,50,.05);
   }
 </style>
 
 <div
   class="doc p-0 bg-white rounded mt-4 overflow-hidden shadow"
   class:bg-white={!dark}
-  class:text-gray-600={!dark}
+  class:text-gray-500={!dark}
   class:bg-gray-800={dark}
-  class:text-white={dark}
+  class:text-gray-300={dark}
+  class:dark={dark}
+  class:light={!dark}
   >
   <table class="w-full">
-    <thead class="font-semibold">
+    <thead class="font-bold">
       <tr>
         <td colspan="3" class="text-center py-2">TRIGGER SELANJUTNYA</td>
       </tr>
@@ -48,28 +53,49 @@
       </tr>
     </thead>
     <tbody>
-      {#each times as time}
+      {#each times as time, i}
       <tr>
         <td
-          width="30"
-          class="text-right text-bold text-sm border px-3 py-2 select-none text-blue-500"
+          width="60"
+          class="text-right text-sm border px-3 py-2 select-none"
           class:border-gray-900={dark}
           class:border-gray-300={!dark}>
-          {fmt(time, 'EEEE')}
+          {#if i == 0 || (i > 0 && fmt(times[i-1], 'EEEE') != fmt(times[i], 'EEEE'))}
+            <span class="text-blue-500 font-bold">{fmt(time, 'EEEE')}</span>
+          {:else}
+            {fmt(time, 'EEEE')}
+          {/if}
         </td>
         <td
-          width="40"
-          class="text-center text-bold text-sm border px-3 py-2 select-none"
+          class="text-center text-sm border px-3 py-2 select-none"
           class:border-gray-900={dark}
           class:border-gray-300={!dark}>
-          {fmt(time, 'dd MMMM yyyy')}
+          {#if i == 0 || (i > 0 && fmt(times[i-1], 'dd') != fmt(times[i], 'dd'))}
+            <span class="text-blue-500 font-bold">{fmt(time, 'dd')}</span>
+          {:else}
+            {fmt(time, 'dd')}
+          {/if}
+          {#if i == 0 || (i > 0 && fmt(times[i-1], 'MMMM') != fmt(times[i], 'MMMM'))}
+            <span class="text-blue-500 font-bold">{fmt(time, 'MMMM')}</span>
+          {:else}
+            {fmt(time, 'MMMM')}
+          {/if}
+          {#if i == 0 || (i > 0 && fmt(times[i-1], 'yyyy') != fmt(times[i], 'yyyy'))}
+            <span class="text-blue-500 font-bold">{fmt(time, 'yyyy')}</span>
+          {:else}
+            {fmt(time, 'yyyy')}
+          {/if}
         </td>
         <td
-          width="30"
-          class="text-left text-bold text-sm border px-3 py-2 select-none text-blue-500"
+          width="60"
+          class="text-left text-sm border px-3 py-2 select-none"
           class:border-gray-900={dark}
           class:border-gray-300={!dark}>
-          {fmt(time, 'HH:mm')}
+          {#if i == 0 || (i > 0 && fmt(times[i-1], 'HH:mm') != fmt(times[i], 'HH:mm'))}
+            <span class="text-blue-500 font-bold">{fmt(time, 'HH:mm')}</span>
+          {:else}
+            {fmt(time, 'HH:mm')}
+          {/if}
         </td>
       </tr>
       {/each}
