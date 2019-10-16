@@ -6,6 +6,20 @@
   export let times;
 
   const fmt = (time, fmtString) => format(time, fmtString, {locale: id});
+
+  function renderTime(time, timeFormat, index) {
+    if (!index) {
+      return `<span class="text-blue-500 font-bold">${fmt(time, timeFormat)}</span>`;
+    }
+
+    const timeB = times[index - 1];
+
+    if (fmt(time, timeFormat) !== fmt(timeB, timeFormat)) {
+      return `<span class="text-blue-500 font-bold">${fmt(time, timeFormat)}</span>`;
+    }
+
+    return fmt(time, timeFormat);
+  }
 </script>
 
 <style>
@@ -60,42 +74,22 @@
           class="text-right text-sm border px-3 py-2 select-none"
           class:border-gray-900={dark}
           class:border-gray-300={!dark}>
-          {#if i == 0 || (i > 0 && fmt(times[i-1], 'EEEE') != fmt(times[i], 'EEEE'))}
-            <span class="text-blue-500 font-bold">{fmt(time, 'EEEE')}</span>
-          {:else}
-            {fmt(time, 'EEEE')}
-          {/if}
+          {@html renderTime(time, 'EEEE', i)}
         </td>
         <td
           class="text-center text-sm border px-3 py-2 select-none"
           class:border-gray-900={dark}
           class:border-gray-300={!dark}>
-          {#if i == 0 || (i > 0 && fmt(times[i-1], 'dd') != fmt(times[i], 'dd'))}
-            <span class="text-blue-500 font-bold">{fmt(time, 'dd')}</span>
-          {:else}
-            {fmt(time, 'dd')}
-          {/if}
-          {#if i == 0 || (i > 0 && fmt(times[i-1], 'MMMM') != fmt(times[i], 'MMMM'))}
-            <span class="text-blue-500 font-bold">{fmt(time, 'MMMM')}</span>
-          {:else}
-            {fmt(time, 'MMMM')}
-          {/if}
-          {#if i == 0 || (i > 0 && fmt(times[i-1], 'yyyy') != fmt(times[i], 'yyyy'))}
-            <span class="text-blue-500 font-bold">{fmt(time, 'yyyy')}</span>
-          {:else}
-            {fmt(time, 'yyyy')}
-          {/if}
+          {@html renderTime(time, 'dd', i)}
+          {@html renderTime(time, 'MMMM', i)}
+          {@html renderTime(time, 'yyyy', i)}
         </td>
         <td
           width="60"
           class="text-left text-sm border px-3 py-2 select-none"
           class:border-gray-900={dark}
           class:border-gray-300={!dark}>
-          {#if i == 0 || (i > 0 && fmt(times[i-1], 'HH:mm') != fmt(times[i], 'HH:mm'))}
-            <span class="text-blue-500 font-bold">{fmt(time, 'HH:mm')}</span>
-          {:else}
-            {fmt(time, 'HH:mm')}
-          {/if}
+          {@html renderTime(time, 'HH', i)}:{@html renderTime(time, 'mm', i)}
         </td>
       </tr>
       {/each}
